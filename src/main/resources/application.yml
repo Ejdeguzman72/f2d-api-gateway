@@ -21,6 +21,13 @@ spring:
           filters:
             - AuthenticationFilter
 
+        - id: f2d-event-planner
+          uri: lb://F2D-CHATROOM
+          predicates:
+            - Path=/chatroom/**
+          filters:
+            - AuthenticationFilter
+
 
   application:
     name: F2D-API-GATEWAY
@@ -28,7 +35,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone : http://localhost:8761/eureka/
+      defaultZone : http://192.168.1.54:8761/eureka/
 
 server:
   port: 9001
