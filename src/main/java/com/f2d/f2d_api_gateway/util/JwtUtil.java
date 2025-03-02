@@ -7,6 +7,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.List;
 
 @Component
@@ -19,7 +20,8 @@ public class JwtUtil {
     }
 
     private Key getSignKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes()); // Ensures proper key format
+        byte[] keyBytes = Base64.getDecoder().decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
 
