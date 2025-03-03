@@ -25,15 +25,16 @@ spring:
           uri: lb://F2D-CHATROOM
           predicates:
             - Path=/chatroom/**
+            - Path=/f2d-chat/**
           filters:
             - AuthenticationFilter
 
-        - id: f2d-middleware
+        - id: middleware
           uri: lb://F2D-MIDDLEWARE
           predicates:
             - Path=/middleware/**
           filters:
-            - AuthenticationFilter
+            - AddRequestHeader=X-User-Name, "{jwt-subject}"  # Extract username from JWT
 
 
   application:
@@ -42,7 +43,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone : http://localhost:8761/eureka/
+      defaultZone : http://192.168.1.54:8761/eureka/
 
 server:
   port: 9001
