@@ -34,7 +34,7 @@ spring:
           predicates:
             - Path=/middleware/**
           filters:
-            - AddRequestHeader=X-User-Name, "{jwt-subject}"  # Extract username from JWT
+            - AuthenticationFilter
 
 
   application:
